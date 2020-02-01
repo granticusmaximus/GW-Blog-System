@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import Box from "@material-ui/core/Box";
+import { BrowserRouter, Route } from "react-router-dom";
+import * as ROUTES from "./Navigation/routes";
 import './App.css';
+import MenuNav from './Navigation/NavBar';
+import BlogPage from './Blog';
+import NewPost from './Blog/NewPost';
+import Post from './Blog/post';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
+      <MenuNav />
+      <div className="container-body">
+        <Box my={5}>
+          <div>
+            <Route exact path={ROUTES.HOME} component={BlogPage} />
+            <Route exact path={ROUTES.NEW_POST} component={NewPost} />
+            <Route exact path={ROUTES.POST} component={Post} />
+          </div>
+        </Box>
+      </div>
+    </BrowserRouter>
   );
 }
 
